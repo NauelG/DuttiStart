@@ -1,0 +1,33 @@
+// Position
+.text-center {
+    text-align: center;
+}
+
+
+
+// Custom forms
+    .control .icon.clickable {
+        pointer-events: initial;
+        cursor: pointer;
+    }
+    
+.is-square {
+    border-radius: 0;
+}
+
+.is-primary-button {
+    background-color: #ceba97;
+    color: #fff;
+}
+
+.is-secondary-button {
+    background-color: #000;
+    color: #fff
+}
+
+input {
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
