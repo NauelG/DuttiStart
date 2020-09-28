@@ -6,9 +6,9 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { CacheService } from './cache.service';
 import { map } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
+import { CacheService } from '../services';
 
 @Injectable()
 export class CacheInterceptor implements HttpInterceptor {
