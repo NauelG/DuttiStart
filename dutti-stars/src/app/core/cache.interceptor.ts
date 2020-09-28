@@ -8,6 +8,7 @@ import {
 import { Observable, of } from 'rxjs';
 import { CacheService } from './cache.service';
 import { map } from 'rxjs/operators';
+import { HttpResponse } from '@angular/common/http';
 
 @Injectable()
 export class CacheInterceptor implements HttpInterceptor {
@@ -30,7 +31,9 @@ export class CacheInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       map( response => {
-        this.cache.put(request, response);
+        if ( response instanceof HttpResponse ) {
+          this.cache.put(request, response);
+        }
         return response;
       })
     );
