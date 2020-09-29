@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserModel } from '../../core/models/user.model';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +11,16 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   public viewPassword = false;
+  public user: UserModel;
+  public loginError = false;
 
   constructor(
-    private _router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.user = {};
   }
 
   public togglePassword(): void {
@@ -22,7 +28,21 @@ export class LoginComponent implements OnInit {
   }
 
   public toRegister(): void {
-    this._router.navigateByUrl('/register');
+    this.router.navigateByUrl('/register');
+  }
+
+  public login() {
+    this.authService.login(this.user.email, this.user.password).subscribe(
+      res => {
+        this.router.navigateByUrl('/');
+      }, err => {
+        this.loginError = true;
+      }
+    );
+  }
+
+  public closeErrorAler(): void {
+    this.loginError = false;
   }
 
 }

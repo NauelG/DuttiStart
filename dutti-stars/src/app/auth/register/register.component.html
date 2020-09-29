@@ -1,60 +1,62 @@
 <section class="section">
+  <div class="container text-center">
+    <h2 class="title is-2">Crear Cuenta</h2>
 
-    <div class="container text-center">
+    <div class="colunms">
+      <div class="column is-4 is-offset-4">
 
-        <h2 class="title is-2">Crear Cuenta</h2>    
-    
-        <div class="colunms">
-
-            <div class="column is-4 is-offset-4">
-
-                <div class="columns">
-                    <div class="column is-6">
-                        <input class="input" type="text" placeholder="Nombre *">
-                    </div>
-                    <div class="column is-6">
-                        <input class="input" type="text" placeholder="Apellidos *">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="control">
-                        <input class="input" type="email" placeholder="E-mail *">
-                    </div>
-                </div>
-            
-                <div class="field">
-                    <div class="control has-icons-right">
-                        <input [type]="viewPassword ? 'text' : 'password'" class="input" placeholder="Contraseña *">
-                        <span class="icon clickable is-small is-right is-active" *ngIf="!viewPassword" (click)="togglePassword()">
-                            <i class="far fa-eye"></i>
-                        </span>
-                        <span class="icon clickable is-small is-right is-active" *ngIf="viewPassword" (click)="togglePassword()">
-                            <i class="far fa-eye-slash"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="field mt-6">
-                    <div class="control">
-                        <button class="button is-fullwidth is-square is-primary-button">Crear Cuenta</button>
-                    </div>
-                </div>
-
-                <span class="mt-6">
-                    ¿Ya tienes cuenta?
-                </span>
-                
-                <div class="field mt-3">
-                    <div class="control">
-                        <button class="button is-fullwidth is-square is-secondary-button" (click)="toLogin()">Iniciar Sesión</button>
-                    </div>
-                </div>
-            
-            </div>
-
+        <div class="notification is-danger is-light" *ngIf="registerError">
+          <button class="delete" (click)="closeErrorAler()"></button>
+          Error de registro
         </div>
 
-    </div>
+        <form ngNativeValidate>
+          <div class="columns">
+            <div class="column is-6">
+              <input class="input" type="text" placeholder="Nombre *" [(ngModel)]="user.name" name="name" />
+            </div>
+            <div class="column is-6">
+              <input class="input" type="text" placeholder="Apellidos *" [(ngModel)]="user.surname" name="surname" />
+            </div>
+          </div>
 
+          <div class="field">
+            <div class="control">
+              <input class="input" type="email" placeholder="E-mail *" [(ngModel)]="user.email" name="email"/>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control has-icons-right">
+              <input [type]="viewPassword ? 'text' : 'password'" class="input" placeholder="Contraseña *" [(ngModel)]="user.password" name="password"/>
+              <span class="icon clickable is-small is-right is-active" *ngIf="!viewPassword" (click)="togglePassword()">
+                <i class="far fa-eye"></i>
+              </span>
+              <span class="icon clickable is-small is-right is-active" *ngIf="viewPassword" (click)="togglePassword()">
+                <i class="far fa-eye-slash"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field mt-6">
+            <div class="control">
+              <button type="button" class="button is-fullwidth is-square is-primary-button" (click)="register()" [disabled]="!formValid()">
+                Crear Cuenta
+              </button>
+            </div>
+          </div>
+
+          <span class="mt-6"> ¿Ya tienes cuenta? </span>
+
+          <div class="field mt-3">
+            <div class="control">
+              <button class="button is-fullwidth is-square is-secondary-button"(click)="toLogin()">
+                Iniciar Sesión
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </section>

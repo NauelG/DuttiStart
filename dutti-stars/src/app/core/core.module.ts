@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiService, CacheService, LocalStorageService } from './services';
 import { CacheInterceptor } from './interceptors';
+import { FormsModule } from '@angular/forms';
 
 export const httpInterceptProviders: Provider[] = [
   { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }
@@ -18,7 +19,8 @@ export const httpInterceptProviders: Provider[] = [
   declarations: [],
   imports: [
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class CoreModule { }
