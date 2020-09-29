@@ -31,3 +31,11 @@ input {
     border-left: none;
     border-right: none;
 }
+
+.button[disabled], fieldset[disabled] .button {
+    background-color:  #ceba97;
+}
+
+.button.is-hovered, .button:hover {
+    color: #e0d9d9;
+}
