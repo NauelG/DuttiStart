@@ -1,7 +1,8 @@
-export interface UserRegisterDto {
+export interface UserModel {
+    id?: number;
     name?: string;
     surname?: string;
-    email: string;
+    email?: string;
     password?: string;
     token?: string;
 }
