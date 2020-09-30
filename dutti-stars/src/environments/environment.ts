@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_url: 'https://swapi.co/',
+  api_url: 'https://swapi.dev/api/',
   cache_age: 300000
 };
 
