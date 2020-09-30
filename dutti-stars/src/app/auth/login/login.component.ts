@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { UserModel } from '../../core/models/user.model';
 import { AuthService } from '../auth.service';
 
@@ -13,14 +13,23 @@ export class LoginComponent implements OnInit {
   public viewPassword = false;
   public user: UserModel;
   public loginError = false;
+  private returnUrl: string;
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.user = {};
+    this.logout();
+    this.activatedRoute.queryParams.subscribe(
+      params => {
+        this.returnUrl = params['returnUrl'] || '/';
+        console.log(this.returnUrl);
+      }
+    );
   }
 
   public togglePassword(): void {
@@ -31,10 +40,10 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/register');
   }
 
-  public login() {
+  public login(): void {
     this.authService.login(this.user.email, this.user.password).subscribe(
       res => {
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl(this.returnUrl);
       }, err => {
         this.loginError = true;
       }
@@ -43,6 +52,10 @@ export class LoginComponent implements OnInit {
 
   public closeErrorAler(): void {
     this.loginError = false;
+  }
+
+  private logout(): void {
+    this.authService.logout().subscribe();
   }
 
 }

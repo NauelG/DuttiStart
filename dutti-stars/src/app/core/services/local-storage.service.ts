@@ -13,7 +13,11 @@ export class LocalStorageService {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  public get(key: LocalStorageItems): void {
-    JSON.parse(localStorage.getItem(key));
+  public get(key: LocalStorageItems): any {
+    return JSON.parse(localStorage.getItem(key));
+  }
+
+  public delete(key: LocalStorageItems): void {
+    localStorage.removeItem(key);
   }
 }

@@ -15,7 +15,9 @@ export class AuthService {
   constructor(
     private api: ApiService,
     private localeStorageService: LocalStorageService
-  ) { }
+  ) {
+
+  }
 
   public login(email: string, password: string): Observable<UserModel> {
     const body = {
@@ -30,6 +32,13 @@ export class AuthService {
       }));
   }
 
+  public logout(): Observable<void> {
+    // return this.api.delete('/auth/logout/')
+    return this.fakeLogout().pipe(map( res => {
+      this.localeStorageService.delete(LocalStorageItems.user);
+    }));
+  }
+
   public register(name: string, surname: string, email: string, password: string): Observable<UserModel> {
     const body = {
       name,
@@ -41,7 +50,10 @@ export class AuthService {
     return this.fakeRegister(body);
   }
 
+  // Mock functions :)
+
   private fakeLogin( body: { email: string, password: string } ): Observable<UserModel> {
+    this.loadState();
     const _this = this;
     const ret: Observable<UserModel> = new Observable(subscriber => {
       const user = _this.USERS.find(e => e.email === body.email);
@@ -51,6 +63,7 @@ export class AuthService {
       } else {
         user.token = btoa(`${new Date().getTime()}:${user.id}:${user.email}`);
         setTimeout(() => {
+          this.saveState();
           subscriber.next({
             id: user.id,
             name: user.name,
@@ -64,8 +77,18 @@ export class AuthService {
     return ret;
   }
 
+  private fakeLogout( ): Observable<void> {
+    const ret: Observable<void> = new Observable(subscriber => {
+      setTimeout(() => {
+        subscriber.next();
+      }, 1000);
+    });
+    return ret;
+  }
+
   private fakeRegister( body: { name: string, surname: string, email: string, password: string } ): Observable<UserModel> {
     const _this = this;
+    this.loadState();
     const ret: Observable<UserModel> = new Observable(subscriber => {
       const userWithSameEmail = _this.USERS.find(e => e.email === body.email);
       if (userWithSameEmail) {
@@ -83,6 +106,7 @@ export class AuthService {
         };
         _this.USERS.push(user);
         setTimeout(() => {
+          this.saveState();
           subscriber.next({
             id: user.id,
             name: user.name,
@@ -94,6 +118,16 @@ export class AuthService {
     });
     return ret;
   }
+
+  private loadState(): void {
+    this.USERS = this.localeStorageService.get(LocalStorageItems.STATE) || [];
+  }
+
+  private saveState(): void {
+    this.localeStorageService.set(LocalStorageItems.STATE, this.USERS);
+  }
+
+
 
   // Fake function that simulates a real hashing protocol.
   private hashPassword(password: string): string {
