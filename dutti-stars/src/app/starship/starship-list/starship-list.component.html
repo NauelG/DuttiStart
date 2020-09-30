@@ -1,1 +1,61 @@
-<p>starship-list works!</p>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <div class="navbar-item title">
+      <h1>DuttiStars</h1>
+    </div>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-square is-primary-button" (click)="logout()">
+            Cerrar Sesión
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="container">
+
+  <div class="columns is-multiline is-mobile">
+    <div class="column is-one-quarter" *ngFor="let starship of starships">
+      <div class="card">
+        <div class="card-content">
+          <p class="title is-4">J{{ starship.name }}</p>
+          <p class="subtitle is-6">{{ starship.model }}</p>
+          <p class="subtitle is-6">{{ starship.class }}</p>
+        </div>
+      
+        <footer class="card-footer">
+          <a href="#" class="card-footer-item">Detalle</a>
+         </footer>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+<section class="container mt-6">
+  <div class="columns">
+    <div class="column">
+
+      <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <button class="pagination-previous button is-square is-primary-button" [disabled]="!previousPage" (click)="previous()">Previous</button>
+        
+        <ul class="pagination-list">
+          <li>
+            <span>{{ page }}</span>
+          </li>
+        </ul>
+        
+        <button class="pagination-next button is-square is-primary-button" [disabled]="!nextPage" (click)="next()">Next page</button>
+
+      </nav>
+    </div>
+  </div>
+</section>
