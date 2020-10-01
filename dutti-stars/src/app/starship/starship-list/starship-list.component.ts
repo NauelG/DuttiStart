@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StarshipService } from '../starship.service';
+import { Starship } from '../../core/models/starship.model';
 
 @Component({
   selector: 'app-starship-list',
@@ -15,6 +16,7 @@ export class StarshipListComponent implements OnInit {
   public totalStarships: number;
   public nextPage: number;
   public previousPage: number;
+  public selectedShip: Starship;
 
   constructor(
     private router: Router,
@@ -49,6 +51,11 @@ export class StarshipListComponent implements OnInit {
 
   public previous(): void {
     this.getStarships(this.previousPage);
+  }
+
+  showDetail(starship: Starship): void {
+    console.log(starship);
+    this.selectedShip = starship;
   }
 
 }

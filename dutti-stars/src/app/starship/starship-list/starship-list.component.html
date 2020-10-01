@@ -5,7 +5,7 @@
     </div>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
+  <div class="navbar-menu">
 
     <div class="navbar-end">
       <div class="navbar-item">
@@ -19,11 +19,11 @@
   </div>
 </nav>
 
-<section class="container">
+<section class="container mt-6">
 
   <div class="columns is-multiline is-mobile">
     <div class="column is-one-quarter" *ngFor="let starship of starships">
-      <div class="card">
+      <div class="card starship-card">
         <div class="card-content">
           <p class="title is-4">J{{ starship.name }}</p>
           <p class="subtitle is-6">{{ starship.model }}</p>
@@ -31,7 +31,7 @@
         </div>
       
         <footer class="card-footer">
-          <a href="#" class="card-footer-item">Detalle</a>
+          <a href="#" class="card-footer-item starship-card-link" (click)="showDetail(starship)">DETALLE</a>
          </footer>
       </div>
     </div>
@@ -59,3 +59,5 @@
     </div>
   </div>
 </section>
+
+<app-starship-detail *ngIf="selectedShip" [(starship)]="selectedShip"></app-starship-detail>
