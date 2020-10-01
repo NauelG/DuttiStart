@@ -1,1 +1,62 @@
-<p>starship-detail works!</p>
+<div class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-card starship-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">{{ starship.name }}</p>
+        <button class="delete" aria-label="close" (click)="close()"></button>
+      </header>
+      <section class="modal-card-body">
+          <table class="table is-fullwidth">
+            <tbody>
+              <tr>
+                <td class="table-title">Manufacturer</td>
+                <td class="table-item">{{ starship.manufacturer }}</td>
+              </tr>
+              <tr>
+                <td class="table-title">Model</td>
+                <td class="table-item">{{ starship.model }}</td>
+              </tr>
+              <tr>
+                <td class="table-title">Created</td>
+                <td class="table-item">{{ starship.created | date }}</td>
+              </tr>
+              <tr>
+                <td class="table-title">Passengers</td>
+                <td class="table-item">{{ starship.passengers }}</td>
+              </tr>
+              <tr>
+                <td class="table-title">MGLT</td>
+                <td class="table-item">{{ starship.MGLT }}</td>
+              </tr>
+              <tr>
+                <td class="table-title">Length</td>
+                <td class="table-item">{{ starship.length }}</td>
+              </tr>
+              <tr>
+                <td class="table-title">Hyperdrive Rating</td>
+                <td class="table-item">{{ starship.hyperdrive_rating }}</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td class="table-title">Cost credits</td>
+                <td class="table-item">{{ starship.cost_in_credits }}</td>
+              </tr>
+            </tfoot>
+          </table>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- <div class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="card starship-card">
+        <div class="card-content">
+          Hola
+        </div>
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click)="close()"></button>
+  </div> -->
