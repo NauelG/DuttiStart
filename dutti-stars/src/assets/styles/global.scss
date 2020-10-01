@@ -1,3 +1,7 @@
+* {
+    font-family: 'Heebo', sans-serif;
+}
+
 // Position
 .text-center {
     text-align: center;
@@ -39,3 +43,25 @@ input {
 .button.is-hovered, .button:hover {
     color: #e0d9d9;
 }
+
+// Cards
+.starship-card {
+    background-color: #f7f7f7;
+    border-radius: 0px;
+}
+
+.starship-card-link{
+    color: #ff7300;
+    font-size: 0.7em;
+}
+
+// Table
+
+.table-title {
+    color: #ff7300;
+    text-transform: uppercase;
+}
+.table-item, .table-title {
+    font-size: 0.9em;
+}
+
